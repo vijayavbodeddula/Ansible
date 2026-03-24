@@ -131,6 +131,12 @@ ansible all -m command -a "uptime"
 ansible test -m command -a "ls /"
 ```
 
+
+### default inventory file path for anible
+/etc/ansible/hosts
+
+if we use sutom inventory means the cmd wll be
+cmd:    ansible -i patha/file-name all -m ping
 ---
 
 ## 7. Notes
