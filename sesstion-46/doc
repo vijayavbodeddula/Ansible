@@ -22,6 +22,10 @@ playbook --> a ploynbook is nothing biut a file which haing the set of task
 
 ansible-playbook cmds
 --------------------
+ansible-playbook ansible.yaml 
+ansible-playbook ansible.yaml --syntax-check
+ansible-playbook ansible.yaml --check
+ansible-playbook ansible.yaml --list-hosts
 
 list out the how many servers the play book will execute
 ----------------------------------------------------------
@@ -63,8 +67,24 @@ output:
 
 
 
+writing playbook for the installing maven and pinigin servers
+---------------------------------------------------------------
+---
+- hosts: dev
+  # gathering_facts: no
+  tasks:
+    - name: executing the ping module
+      ping:
+    - name: installing the maven
+      apt:
+        name: maven
+        state: present
+...
+
+
 commands
 --------
+ansible-playbook --help
 ansible-playbook ansible.yaml 
 ansible-playbook ansible.yaml --syntax-check
 ansible-playbook ansible.yaml --check
