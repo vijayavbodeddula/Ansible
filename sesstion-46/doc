@@ -4,3 +4,68 @@ in dev service i have stopped the nginx server manully
     cmd -->    systemctl status nginx
 using ansible start the server again
     cmd --> ansible dev -b -m service -a "name=nginx state=started"
+using ansible copying the file from local to remote
+    cmd --> ansible dev -b -m copy -a "src=src-file dest=path"
+using ansible we can get the info of hosts server
+    cmd --> ansible dev -b -m copy
+
+playbook --> a ploynbook is nothing biut a file which haing the set of task 
+
+    all playbook starts with --- and ends with ...
+
+    a play book having three sections 
+    - target:
+      tasks:
+        - name: pinging the serever
+          ping:
+
+
+ansible-playbook cmds
+--------------------
+
+list out the how many servers the play book will execute
+----------------------------------------------------------
+ubuntu@ip-172-31-36-98:~$ ansible-playbook ansible.yaml --list-hosts
+output:
+    playbook: ansible.yaml
+
+    play #1 (dev): dev	TAGS: []
+        pattern: ['dev']
+        hosts (1):
+        172.31.34.185
+    ubuntu@ip-172-31-36-98:~$ 
+
+
+
+
+dry run cmd 
+-----------
+ansible-playbook ansible.yaml --check
+output:
+    PLAY [dev] ************************************************************************************************************************************************************************************************
+
+    TASK [Gathering Facts] ************************************************************************************************************************************************************************************
+    ok: [172.31.34.185]
+
+    TASK [executing the ping module] **************************************************************************************************************************************************************************
+    ok: [172.31.34.185]
+
+    PLAY RECAP ************************************************************************************************************************************************************************************************
+    172.31.34.185              : ok=2    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+
+
+
+syntax checking for playbook
+------------------------------
+ubuntu@ip-172-31-36-98:~$ ansible-playbook ansible.yaml --syntax-check
+output:
+    playbook: ansible.yaml 
+
+
+
+commands
+--------
+ansible-playbook ansible.yaml 
+ansible-playbook ansible.yaml --syntax-check
+ansible-playbook ansible.yaml --check
+ansible-playbook ansible.yaml --list-hosts
