@@ -129,6 +129,7 @@ ansible all -m command -a "uptime"
 
 ```bash
 ansible test -m command -a "ls /"
+ansible all -m shell -a "rm -f pathee"
 ```
 
 
