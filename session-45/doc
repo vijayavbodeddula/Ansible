@@ -125,6 +125,12 @@ ansible localhost -b -m apt -a "name=nginx state=present"
 ansible all -m command -a "uptime"
 ```
 
+### Run command on top of test  servers to see the list files
+
+```bash
+ansible test -m command -a "ls /"
+```
+
 ---
 
 ## 7. Notes
