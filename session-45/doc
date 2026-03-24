@@ -147,9 +147,13 @@ custom inventpry file
     172.31.33.162 ansible_user=ubuntu ansible_password=12345
 
     cmd: ansible -i hosts all -m ping
+    cmd --> ubuntu@ip-172-31-36-98:~$ sudo vi /etc/ansible/ansible.cfg
+    add the below text insibe cfg file
+        [defaults]
+        host_key_checking = False
 
-    ubuntu@ip-172-31-36-98:~$ sudo vi /etc/ansible/ansible.cfg
-    ubuntu@ip-172-31-36-98:~$ ansible -i hosts all -m ping
+    cmd --> ubuntu@ip-172-31-36-98:~$ sudo vi /etc/ansible/ansible.cfg
+    cmd --> ubuntu@ip-172-31-36-98:~$ ansible -i hosts all -m ping
     172.31.33.162 | SUCCESS => {
         "ansible_facts": {
             "discovered_interpreter_python": "/usr/bin/python3"
@@ -158,9 +162,7 @@ custom inventpry file
         "ping": "pong"
     }
     
-    ubuntu@ip-172-31-36-98:~$ sudo vi /etc/ansible/ansible.cfg
-        [defaults]
-        host_key_checking = False
+    
 
 
 ## 7. Notes
