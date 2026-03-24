@@ -139,6 +139,30 @@ if we use sutom inventory means the cmd wll be
 cmd:    ansible -i patha/file-name all -m ping
 ---
 
+
+### using password can authenticate with the new server
+custom inventpry file
+ hosts
+    [new]
+    172.31.33.162 ansible_user=ubuntu ansible_password=12345
+
+    cmd: ansible -i hosts all -m ping
+
+    ubuntu@ip-172-31-36-98:~$ sudo vi /etc/ansible/ansible.cfg
+    ubuntu@ip-172-31-36-98:~$ ansible -i hosts all -m ping
+    172.31.33.162 | SUCCESS => {
+        "ansible_facts": {
+            "discovered_interpreter_python": "/usr/bin/python3"
+        },
+        "changed": false,
+        "ping": "pong"
+    }
+    
+    ubuntu@ip-172-31-36-98:~$ sudo vi /etc/ansible/ansible.cfg
+        [defaults]
+        host_key_checking = False
+
+
 ## 7. Notes
 
 * Ensure SSH connectivity works before running Ansible
