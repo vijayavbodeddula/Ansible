@@ -1,0 +1,6 @@
+
+in dev service i have stopped the nginx server manully
+    cmd -->    systemctl stop nginx
+    cmd -->    systemctl status nginx
+using ansible start the server again
+    cmd --> ansible dev -b -m service -a "name=nginx state=started"
