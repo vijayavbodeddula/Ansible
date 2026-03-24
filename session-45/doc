@@ -1,0 +1,135 @@
+# Ansible Setup and Configuration – Step-by-Step Guide
+
+## 1. Install Ansible
+
+Update the package list and install Ansible:
+
+```bash
+sudo apt update
+sudo apt install ansible -y
+```
+
+---
+
+## 2. Configure SSH Access (Password or Key-Based)
+
+### Generate SSH Key on Control Node
+
+```bash
+ssh-keygen
+```
+
+### Copy SSH Key to Target Server
+
+```bash
+ssh-copy-id ubuntu@<target-ip>
+```
+
+---
+
+## 3. Enable Password Authentication (if required)
+
+Edit SSH configuration on the **target server**:
+
+```bash
+sudo vi /etc/ssh/sshd_config.d/*.conf
+```
+
+Change:
+
+```bash
+PasswordAuthentication no
+```
+
+To:
+
+```bash
+PasswordAuthentication yes
+```
+
+Restart SSH service:
+
+```bash
+sudo systemctl restart ssh
+```
+
+Set password for user:
+
+```bash
+sudo passwd ubuntu
+```
+
+---
+
+## 4. Create Ansible Inventory File
+
+Create directory:
+
+```bash
+sudo mkdir -p /etc/ansible
+```
+
+Create hosts file:
+
+```bash
+sudo vi /etc/ansible/hosts
+```
+
+Add inventory:
+
+    localhost
+
+    [stage]
+    private-ip
+
+    [dev]
+    172.31.34.185 ansible_user=ubuntu ansible_password=12345
+
+    [test]
+    172.31.35.191 ansible_user=ubuntu ansible_ssh_private_key_file=/path/file
+
+
+## 5. Verify Connectivity Using Ansible
+
+Check all hosts:
+
+```bash
+ansible all -m ping
+```
+
+Check specific host:
+
+```bash
+ansible localhost -m ping
+```
+
+---
+
+## 6. Run Ad-hoc Commands
+
+### Install Nginx (Ubuntu)
+
+```bash
+ansible localhost -m apt -a "name=nginx state=present"
+
+
+### Install Nginx with sudo privileges
+
+```bash
+ansible localhost -b -m apt -a "name=nginx state=present"
+```
+
+### Run command on all servers
+
+```bash
+ansible all -m command -a "uptime"
+```
+
+---
+
+## 7. Notes
+
+* Ensure SSH connectivity works before running Ansible
+* Use key-based authentication for better security
+* Avoid using plain-text passwords in production
+* Inventory file is critical for defining manage
