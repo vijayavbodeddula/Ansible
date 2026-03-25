@@ -1,0 +1,92 @@
+# Ansible: Host Variables and Group Variables
+
+## 📌 Overview
+
+In Ansible, variables are used to manage configuration across hosts.  
+There are two main types:
+
+- **Host Variables**
+- **Group Variables**
+
+---
+
+## 🔹 Host Variables
+
+Host variables are defined for a **specific host**.
+
+### ✅ Use Case
+- When each server needs different configuration
+
+### ✅ Example (Inventory)
+
+```ini
+[dev]
+172.31.34.185 ansible_user=ubuntu env=dev app_port=8080
+
+
+🔹 Group Variables
+
+Group variables are defined for a group of hosts.
+
+✅ Use Case
+When multiple servers share common configuration
+
+
+✅ Example (Inventory)
+
+[dev]
+172.31.34.185
+172.31.34.186
+
+[dev:vars]
+ansible_user=ubuntu
+app_port=8080
+env=development
+
+### Applies to all hosts in dev group
+
+
+Best Practice: Using group_vars and host_vars
+📁 Directory Structure
+/etc/ansible/
+│
+├── hosts
+├── group_vars/
+│   └── dev.yml
+├── host_vars/
+│   └── 172.31.34.185.yml
+
+
+
+✅ group_vars/dev.yml
+app_name: myapp
+app_port: 8080
+env: development
+
+👉 Applies to all hosts in dev
+
+✅ host_vars/172.31.34.185.yml
+app_port: 9090
+
+👉 Overrides group variable for this host
+
+⚡ Variable Precedence
+Host Variables > Group Variables
+
+👉 Host variables override group variables if conflict occurs
+
+🔹 Playbook Example
+- hosts: dev
+  become: yes
+  tasks:
+    - name: Print variables
+      debug:
+        msg: "App {{ app_name }} running on port {{ app_port }}"
+🧪 Output Example
+
+For host 172.31.34.185:
+
+App myapp running on port 9090
+🎯 Interview Answer
+
+Host variables are used for host-specific configurations, while group variables are used for common configurations across a group of hosts. Host variables have higher precedence than group variables.
