@@ -89,3 +89,48 @@ ansible-playbook ansible.yaml
 ansible-playbook ansible.yaml --syntax-check
 ansible-playbook ansible.yaml --check
 ansible-playbook ansible.yaml --list-hosts
+
+
+
+
+playbook:
+
+[dev]
+172.31.34.185 ansible_user=ubuntu ansible_password=12345
+
+# commented
+------------
+#[test]
+#72.31.35.191 ansible_ssh_private_key_file=/file.pem
+
+ubuntu@ip-172-31-36-98:~$ ansible 172.31.34.185 -m ping 
+172.31.34.185 | SUCCESS => {
+    "ansible_facts": {
+        "discovered_interpreter_python": "/usr/bin/python3"
+    },
+    "changed": false,
+    "ping": "pong"
+}
+ubuntu@ip-172-31-36-98:~$ ansible 172.31.34.185,172.31.35.191 -m ping 
+[WARNING]: Could not match supplied host pattern, ignoring: 172.31.35.191
+172.31.34.185 | SUCCESS => {
+    "ansible_facts": {
+        "discovered_interpreter_python": "/usr/bin/python3"
+    },
+    "changed": false,
+    "ping": "pong"
+}
+ubuntu@ip-172-31-36-98:~$ ansible 172.31.34.185,172.31.35.191,localhost -m ping 
+[WARNING]: Could not match supplied host pattern, ignoring: 172.31.35.191
+localhost | SUCCESS => {
+    "changed": false,
+    "ping": "pong"
+}
+172.31.34.185 | SUCCESS => {
+    "ansible_facts": {
+        "discovered_interpreter_python": "/usr/bin/python3"
+    },
+    "changed": false,
+    "ping": "pong"
+}
+ubuntu@ip-172-31-36-98:~$ 
