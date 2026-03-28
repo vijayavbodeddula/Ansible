@@ -1,92 +1,117 @@
-# Ansible: Host Variables and Group Variables
+Ansible Variables – Complete Guide
+📌 Overview
 
-## 📌 Overview
+Variables in Ansible are used to store values that can be reused across playbooks, inventories, and roles. They help in making automation dynamic and flexible.
 
-In Ansible, variables are used to manage configuration across hosts.  
-There are two main types:
+🔥 Types of Variables in Ansible
+🧩 1. Based on Scope
+🔹 1. Host Variables
 
-- **Host Variables**
-- **Group Variables**
+Defined for a specific host.
 
----
-
-## 🔹 Host Variables
-
-Host variables are defined for a **specific host**.
-
-### ✅ Use Case
-- When each server needs different configuration
-
-### ✅ Example (Inventory)
-
-```ini
 [dev]
-172.31.34.185 ansible_user=ubuntu env=dev app_port=8080
+172.31.34.185 ansible_user=ubuntu app_port=8080
 
+👉 Applies only to that host
 
-🔹 Group Variables
+🔹 2. Group Variables
 
-Group variables are defined for a group of hosts.
-
-✅ Use Case
-When multiple servers share common configuration
-
-
-✅ Example (Inventory)
+Defined for a group of hosts.
 
 [dev]
 172.31.34.185
 172.31.34.186
 
 [dev:vars]
-ansible_user=ubuntu
 app_port=8080
 env=development
 
-### Applies to all hosts in dev group
+👉 Applies to all hosts in the group
 
+🔹 3. Playbook Variables
 
-Best Practice: Using group_vars and host_vars
-📁 Directory Structure
-/etc/ansible/
-│
-├── hosts
-├── group_vars/
-│   └── dev.yml
-├── host_vars/
-│   └── 172.31.34.185.yml
+Defined inside a playbook.
 
-
-
-✅ group_vars/dev.yml
-app_name: myapp
-app_port: 8080
-env: development
-
-👉 Applies to all hosts in dev
-
-✅ host_vars/172.31.34.185.yml
-app_port: 9090
-
-👉 Overrides group variable for this host
-
-⚡ Variable Precedence
-Host Variables > Group Variables
-
-👉 Host variables override group variables if conflict occurs
-
-🔹 Playbook Example
 - hosts: dev
-  become: yes
-  tasks:
-    - name: Print variables
-      debug:
-        msg: "App {{ app_name }} running on port {{ app_port }}"
-🧪 Output Example
+  vars:
+    app_name: myapp
+    port: 8080
+🔹 4. Extra Variables (Highest Priority)
 
-For host 172.31.34.185:
+Passed at runtime.
 
-App myapp running on port 9090
+ansible-playbook playbook.yml -e "env=prod"
+
+👉 Highest precedence
+
+🧩 2. Based on Location
+🔹 5. group_vars
+
+Stored in separate files for groups.
+
+# group_vars/dev.yml
+app_name: myapp
+env: dev
+
+🔹 6. host_vars
+
+Stored for individual hosts.
+
+# host_vars/172.31.34.185.yml
+app_port: 9090
+🧩 3. Based on Usage Type
+🔹 7. Registered Variables
+
+Store output of a task.
+
+- name: Check disk usage
+  command: df -h
+  register: disk_output
+
+- debug:
+    var: disk_output.stdout
+🔹 8. Facts (System Variables)
+
+Automatically gathered system information.
+
+- debug:
+    var: ansible_os_family
+
+👉 Examples: OS, IP, CPU
+
+🔹 9. Environment Variables
+environment:
+  JAVA_HOME: /usr/lib/jvm/java-17
+🔹 10. Loop Variables
+- name: Install packages
+  apt:
+    name: "{{ item }}"
+    state: present
+  loop:
+    - git
+    - nginx
+
+👉 item is default loop variable
+
+🔹 11. set_fact Variables
+
+Create variables dynamically.
+
+- set_fact:
+    app_version: "v1"
+⚡ Variable Precedence (Important)
+
+Order (High → Low):
+
+Extra Vars (-e)
+Task Variables
+Play Variables
+Host Variables
+Group Variables
+Facts
 🎯 Interview Answer
 
-Host variables are used for host-specific configurations, while group variables are used for common configurations across a group of hosts. Host variables have higher precedence than group variables.
+Ansible variables can be defined at different levels such as host variables, group variables, playbook variables, and extra variables. Additionally,
+we have registered variables, facts, and set_fact variables. Extra variables have the highest precedence.
+
+💯
