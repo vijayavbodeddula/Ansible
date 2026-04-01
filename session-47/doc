@@ -1,1 +1,54 @@
-learning on the 
+creating file on remote serevr
+---------------------------------
+
+---
+- hosts: all
+  become: true
+  tasks: 
+    - name: creating file in all servers
+      file:
+        name: /etc/vijay
+        state: touch
+...
+
+choices for file of state
+------------------------
+state : touch
+        link
+        hard
+        file
+        directory
+        absent
+
+
+
+installing the httpd server and starting it
+-------------------------------------------
+-- hosts: all
+   become: true
+   tasks:
+     - name: installing http server
+       apt:
+         name: httpd
+         state: present
+     - name: starting the httpd server
+       service:
+         name: httpd
+         state: started
+
+
+copying file from ansible sever to remote server
+------------------------------------------------
+
+---
+- hosts: all
+  become: true
+  tasks:
+    - name: copying the local to all servers
+      copy:
+        src: /ect/vijay
+        dest: /var/www/html/index.html
+
+
+using the double flower brackets we can print the varible values
+=---------------------------------------------------------------
