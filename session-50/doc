@@ -20,8 +20,13 @@ ansible vault: it is used to store the sensitive data by encrypting it
     ----------------------------
     passoword: 12345
 
-    ansible-vault encrypt /etc/ansible/group_vars/all.yml
-    ansible-vault --help
+    cmd: ansible-vault encrypt /etc/ansible/group_vars/all.yml   -> when execute this cmd we have to set passoword for the 
 
+    ansible-vault --help
+    ansible-vault view file
+    ansible-vault edit file
+    ansible-vault decrypt file
     
+
+
 
