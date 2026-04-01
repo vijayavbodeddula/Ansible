@@ -8,3 +8,20 @@ commands:
 3) ansible all -m ping --list-tags
 4) ansible all -m ping --skip-tags dev
 5) ansible all -m ping --skip-tags 'dev,stage'
+
+
+
+ansible vault: it is used to store the sensitive data by encrypting it
+---------------
+    open a file 
+    vi /etc/ansible/group_vars/all.yml
+
+    enter this value in all.yaml
+    ----------------------------
+    passoword: 12345
+
+    ansible-vault encrypt /etc/ansible/group_vars/all.yml
+    ansible-vault --help
+
+    
+

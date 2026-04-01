@@ -8,6 +8,9 @@ creating file on remote serevr
     - name: creating file in all servers
       file:
         name: /etc/vijay
+        owner: ubuntu
+        group: ubuntu
+        mode: 0777
         state: touch
 ...
 
@@ -52,3 +55,9 @@ copying file from ansible sever to remote server
 
 using the double flower brackets we can print the varible values
 =---------------------------------------------------------------
+{{var_name}}
+
+
+
+copy the local file and use varible inside it and print the values using the file
+---------------------------------------------------------------------------------
