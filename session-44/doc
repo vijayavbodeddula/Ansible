@@ -1,0 +1,129 @@
+📌 What is Ansible?
+
+Ansible is an open-source configuration management and deployment tool used to:
+
+Install software
+Update applications
+Remove packages
+Create/delete users
+Automate infrastructure
+👉 It is widely used in DevOps for automation and CI/CD pipelines
+
+🔥 Configuration Management Tools
+Tool	Agent	Type
+Chef	Required	Pull-based
+Puppet	Required	Pull-based
+Ansible	Not Required	Push-based
+
+👉 Key Difference:
+
+Chef & Puppet → Agents installed on servers
+Ansible → No agent required (uses SSH)
+⚙️ Key Features of Ansible
+Agentless architecture
+Uses SSH for communication
+Simple YAML syntax (easy to learn)
+Idempotent (safe to run multiple times)
+Fast and lightweight
+Secure (no additional ports required)
+🧩 What Can Ansible Do?
+
+👉 Ansible can:
+
+Install software on single/multiple systems
+Configure servers automatically
+Deploy applications
+Manage users and permissions
+Perform patch updates
+Orchestrate multi-tier applications
+🧠 Ansible Architecture
+Ansible Control Node (Server)
+        |
+        | SSH
+        ↓
+Managed Nodes (Host Servers)
+🔹 Components of Ansible
+1. Control Node (Ansible Server)
+
+👉 The machine where Ansible is installed
+👉 Executes playbooks
+
+2. Managed Nodes (Host Servers)
+
+👉 Target systems where tasks are executed
+
+3. Inventory (Hosts File)
+
+👉 Contains list of servers
+
+Example:
+
+[dev]
+172.31.37.28
+172.31.35.4
+4. Playbook
+
+👉 YAML file that defines tasks
+
+Example:
+
+- hosts: dev
+  become: yes
+  tasks:
+    - name: Install Nginx
+      apt:
+        name: nginx
+        state: present
+5. Modules
+
+👉 Pre-built tools used to perform tasks
+
+Examples:
+
+ping
+apt
+yum
+copy
+service
+6. Tasks
+
+👉 Individual actions in playbook
+
+7. Roles
+
+👉 Organize playbooks into reusable structure
+
+🔥 Important Terminology
+Term	    Meaning
+Inventory	List of servers
+Playbook	YAML automation file
+Task	    Single action
+Module	    Tool used in task
+Role	    Structured automation
+Handler	    Runs when notified
+Variables	Store dynamic values
+
+⚡ Push vs Pull Model
+🔹 Push Model (Ansible)
+Control node pushes configuration
+No agent needed
+🔹 Pull Model (Chef/Puppet)
+Agents pull configuration from server
+💯 Real-Time Example
+
+👉 In project:
+
+Install Java & Maven
+Deploy Spring Boot application
+Configure server
+Restart services
+🎯 Interview Answer (Best)
+
+“Ansible is an open-source configuration management and deployment tool used to automate tasks like software installation, server configuration, and application deployment. It is agentless and uses SSH to push configurations from the control node to managed nodes using YAML-based playbooks.”
+
+🚀 Summary
+Tool Type → Automation
+Architecture → Agentless
+Communication → SSH
+Language → YAML
+Model → Push-based
