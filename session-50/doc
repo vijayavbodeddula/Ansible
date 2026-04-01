@@ -1,0 +1,10 @@
+working on tags and the ansible vault
+
+tags: these are used to run a specific task or part of task which are inside the playbook
+commands:
+---------
+1) ansible all -m ping --tags dev
+2) 1) ansible all -m ping --tags 'dev,stage'
+3) ansible all -m ping --list-tags
+4) ansible all -m ping --skip-tags dev
+5) ansible all -m ping --skip-tags 'dev,stage'
