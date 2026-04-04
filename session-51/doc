@@ -1,0 +1,29 @@
+✅ What are Roles in Ansible?
+    Roles in Ansible are a way to organize your playbooks into reusable, structured components.
+    Instead of writing one big playbook, you split it into smaller parts called roles.
+creating roles
+-------------
+cmd: ansible-galaxy init role-name   --  this will create a directory having files also below how it looks like
+
+    └── role-name
+        ├── README.md
+        ├── defaults
+        │   └── main.yml
+        ├── files           --> any files which we   need to copy to remote sever we place here
+        ├── handlers        --> handelers will righte here
+        │   └── main.yml
+        ├── meta            --> config values
+        │   └── main.yml
+        ├── tasks           
+        │   └── main.yml
+        ├── templates
+        ├── tests
+        │   ├── inventory
+        │   └── test.yml
+        └── vars
+            └── main.yml
+
+
+difference between roles and playbook
+-------------------------------------
+A playbook is a YAML file that defines tasks and execution flow, whereas a role is a structured way of organizing those tasks into reusable components. Roles improve maintainability and scalability, especially in large projects.
