@@ -14,7 +14,9 @@
         1.4.3) service
         1.4.4) file
         1.4.5) user
-        1.4.6) 
+        1.4.6) command
+        1.4.7) shell
+
 
 2) learnig ansible cmds which we call it as adhoc commads
     2.1) adhoc commands 
