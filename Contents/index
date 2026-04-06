@@ -15,7 +15,7 @@
    1.2)hosts
    1.3) playbook
    
-
+---------------------------------------------------------------------------------------------------
 2) learnig ansible cmds which we call it as adhoc commads
     2.1) adhoc commands 
         2.1.0) ansible <severs or groups or ips> -b -m  module -a "name=value"
@@ -42,6 +42,8 @@
                shell
                copy or template
                setup
+
+---------------------------------------------------------------------------------------------------
 3) sample playbook
    0) starts with ---  and end with ...
    1) install httpd  sever
@@ -58,6 +60,8 @@
             - ansible-playbokk playbook-name --check   --> dry run
             - ansible-playbokk playbook-name --list-hosts
             - ansible-playbook playbook-name --extra-vars "v1=10 v2=20"
+
+---------------------------------------------------------------------------------------------------
 4) modules using ansible play-book
     1) creating a file in remote server 
        file:
@@ -109,6 +113,7 @@
         output:
         printing a vaule is 10
 
+---------------------------------------------------------------------------------------------------
 5) a) variables
                 tasks variable
                 playbook varibles
@@ -120,10 +125,12 @@
             implanting the playbook using group vars and hosts vars
     b) handlers
 
+---------------------------------------------------------------------------------------------------
 6) a) loops
    b) conditions
    c) tags
 
+---------------------------------------------------------------------------------------------------
 7) a) ansible-vault
    b) roles
    c) dynamic hosts
