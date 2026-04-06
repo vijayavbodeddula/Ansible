@@ -2,6 +2,9 @@
    1.0) what is ansible
         1.0.1) installation
         1.0.2) providing connection between master and slave
+                a) password  
+                b) pem file
+                c) ssh-keygen and ssh-copy-ip user@ip
         1.0.3) servers
                master
                slave
