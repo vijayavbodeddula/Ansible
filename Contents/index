@@ -109,12 +109,23 @@
         output:
         printing a vaule is 10
 
-5) variables
-    tasks variable
-    playbook varibles
-    extra-vars
-    group variables    /etc/ansible/group_vars/group-name.yaml
-    all.yaml            /etc/ansible/group_vars/all.yaml
-    hosts vars        /etc/ansible/group_vars/host-ip.yaml
-    
-  implanting the playbook using group vars and hosts vars
+5) a) variables
+                tasks variable
+                playbook varibles
+                extra-vars
+                group variables    /etc/ansible/group_vars/group-name.yaml
+                all.yaml            /etc/ansible/group_vars/all.yaml
+                hosts vars        /etc/ansible/group_vars/host-ip.yaml
+                
+            implanting the playbook using group vars and hosts vars
+    b) handlers
+
+6) a) loops
+   b) conditions
+   c) tags
+
+7) a) ansible-vault
+   b) roles
+   c) dynamic hosts
+       
+  
