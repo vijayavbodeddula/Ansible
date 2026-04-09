@@ -36,22 +36,22 @@
 
     Hosts Inventory :
     ----------------
-    is a file in Ansible that contains the list of managed nodes (servers) and groups them for easier management. By default, it is located at /etc/ansible/hosts.
+        is a file in Ansible that contains the list of managed nodes (servers) and groups them for easier management. By default, it is located at /etc/ansible/hosts.
+        
+        [webservers]
+        server1 ansible_host=192.168.1.10
+        server2 ansible_host=192.168.1.11
 
-    [webservers]
-    server1 ansible_host=192.168.1.10
-    server2 ansible_host=192.168.1.11
-
-    [dbservers]
-    server3 ansible_host=192.168.1.12
+        [dbservers]
+        server3 ansible_host=192.168.1.12
 
 
-    installing:
-    ----------
-    it is a python based tools so we need to install python but i am using the ubuntu so no need we can install directly
+        installing:
+        ----------
+        it is a python based tools so we need to install python but i am using the ubuntu so no need we can install directly
 
-    cmd: apt update -y
-         apt install ansible -y
+        cmd: apt update -y
+            apt install ansible -y
 
     
     ansible server can login into the manage nodes by using below
@@ -85,5 +85,14 @@
             ip3 ansible_user=username ansible_private_key_file=/path/to/key.pem
                 
 
+    other tools
+    ----------
+    chef
+    puppet 
 
-              
+    these 2 are agent based tools need to install the agent in managed nodes and pull based tools 
+
+
+    playbook
+    ---------
+    Ansible Playbook is a YAML file that contains a set of plays used to automate tasks on managed nodes. Each play defines the target hosts, tasks to execute, and optional variables.
