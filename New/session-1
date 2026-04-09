@@ -1,0 +1,89 @@
+ introductions
+    default paths /etc/ansible/hosts
+                  
+   1.0) what is ansible
+        1.0.0) servers
+               master
+               slave
+        1.0.1) installation
+        1.0.2) providing connection between master and slave
+                a) password  
+                b) pem file
+                c) ssh-keygen and ssh-copy-ip user@ip
+
+   1.1) other tool like ansible  (chef, puppet)
+   1.2)hosts
+   1.3) playbook
+
+   -------------------------------------------------------------
+
+   defination: Ansible is an open-source configuration management and automation tool used to manage servers. It helps in automating tasks like installing, updating, and removing software, as well as creating and managing users, configuring systems, and deploying applications
+
+
+    ARCHITECTIRE ANSIBLE
+    -------------------
+    1. Control Node (Master)
+    2. Managed Nodes (Slave / Target Servers)
+
+    1. Control Node (Master)
+        This is the machine where Ansible is installed
+        From here you run playbooks and commands
+        It controls all other servers
+    2. Managed Nodes
+        These are the servers Ansible manages
+        No need to install Ansible here (agentless)
+        Connected via SSH
+
+    Hosts Inventory :
+    ----------------
+    is a file in Ansible that contains the list of managed nodes (servers) and groups them for easier management. By default, it is located at /etc/ansible/hosts.
+
+    [webservers]
+    server1 ansible_host=192.168.1.10
+    server2 ansible_host=192.168.1.11
+
+    [dbservers]
+    server3 ansible_host=192.168.1.12
+
+
+    installing:
+    ----------
+    it is a python based tools so we need to install python but i am using the ubuntu so no need we can install directly
+
+    cmd: apt update -y
+         apt install ansible -y
+
+    
+    ansible server can login into the manage nodes by using below
+    ------------------
+    1) using password
+    2) ssh-connection
+    3) pe file
+
+
+        1) using password:
+            1) for managed node first set the password and enable password authentication
+            cmd : passwd user
+            2) then enable password authentication
+            vi vi /etc/ssh/sshd_config/*.conf
+                passwordAuthentication no ---> change this to yes
+            3) restart the ssh or sshd
+                systemctl restart ssh
+        2) ssh-connection
+            1) first generate the public key and perivate key
+                cmd: ssh-keygen
+            2) copy the public key to managed servers
+                cmd: ssh-copy-id user@ip
+
+        /etc/ansible/hosts
+        -----------------
+            [group1]
+            ip1   # SSH key-based authentication already configured (ssh-keygen + ssh-copy-id)
+
+            ip2 ansible_user=username ansible_password=password
+
+            ip3 ansible_user=username ansible_private_key_file=/path/to/key.pem
+                
+
+
+              
