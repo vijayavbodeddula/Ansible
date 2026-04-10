@@ -119,7 +119,7 @@ installing the  nginx using the playbook
         become: true
         tasks: 
             - name: pinging all servers
-            apt:
+            yum:
                 name: httpd
                 state: installed
         ...       
