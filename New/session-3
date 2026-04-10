@@ -1,0 +1,18 @@
+3) sample playbook
+   0) starts with ---  and end with ...
+   1) install httpd  sever
+   2) start the httpd server which installed
+   3) Variables and register
+        vars:
+            a: 10
+            b: 20
+    4) printing the values inyaml using double flower braces {{a}}
+    5)cmds to executing the play books
+        cmds:
+            - ansible-playbokk playbook-name -b
+            - ansible-playbokk playbook-name --syntax-check
+            - ansible-playbokk playbook-name --check   --> dry run
+            - ansible-playbokk playbook-name --list-hosts
+            - ansible-playbook playbook-name --extra-vars "v1=10 v2=20"
+
+---------------------------------------------------------------------------------------------------
