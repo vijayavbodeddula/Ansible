@@ -25,3 +25,67 @@
                copy or template
                setup
 -----------------------------------------------------------------------------------------------
+what are ansible adhoc commands:
+    Ansible ad-hoc commands are one-line commands used to perform quick, simple tasks on managed nodes without writing a playbook.
+    
+    hosts file
+    ...............................................................................
+    ubuntu@ip-172-31-66-205:~$ cat /etc/ansible/hosts 
+    localhost  
+    172.31.65.198 
+    [dev]
+    172.31.71.64 ansible_user=ec2-user ansible_password=12345
+    172.31.75.2 ansible_user=ec2-user ansible_ssh_private_key_file=personal.pem
+
+
+    [test]
+    172.31.65.198 ansible_user=ec2-user
+    .................................................................................
+
+    syntax: ansible ip|groupsor[dev,stage] -m module -a "variable=value var2=value"
+
+    ADHOC-CMD:1) ping server using ping module:
+                cmd: ansible all -m ping
+
+                output:
+                    WARNING]: Platform linux on host 172.31.75.2 is using the discovered Python interpreter at /usr/bin/python3.9, but future installation of another Python interpreter could change the meaning of that
+                    path. See https://docs.ansible.com/ansible-core/2.16/reference_appendices/interpreter_discovery.html for more information.
+                    172.31.75.2 | SUCCESS => {
+                        "ansible_facts": {
+                            "discovered_interpreter_python": "/usr/bin/python3.9"
+                        },
+                        "changed": false,
+                        "ping": "pong"
+                    }
+                    [WARNING]: Platform linux on host 172.31.71.64 is using the discovered Python interpreter at /usr/bin/python3.9, but future installation of another Python interpreter could change the meaning of that
+                    path. See https://docs.ansible.com/ansible-core/2.16/reference_appendices/interpreter_discovery.html for more information.
+                    172.31.71.64 | SUCCESS => {
+                        "ansible_facts": {
+                            "discovered_interpreter_python": "/usr/bin/python3.9"
+                        },
+                        "changed": false,
+                        "ping": "pong"
+                    }
+                    [WARNING]: Platform linux on host 172.31.65.198 is using the discovered Python interpreter at /usr/bin/python3.9, but future installation of another Python interpreter could change the meaning of that
+                    path. See https://docs.ansible.com/ansible-core/2.16/reference_appendices/interpreter_discovery.html for more information.
+                    172.31.65.198 | SUCCESS => {
+                        "ansible_facts": {
+                            "discovered_interpreter_python": "/usr/bin/python3.9"
+                        },
+                        "changed": false,
+                        "ping": "pong"
+                    }
+                    localhost | SUCCESS => {
+                        "ansible_facts": {
+                            "discovered_interpreter_python": "/usr/bin/python3"
+                        },
+                        "changed": false,
+                        "ping": "pong"
+                    }
+                ----
+    ADHOC-CMD:2)
+
+            2.1) ansible dev -m yum -a "name=httpd state=present"
+            2.2) ansible dev -m service -a "name=httpd state=started"
+            2.2) ansible dev -m commads -a "ls"
+            2.3) ansible dev -m shell -a "pwd"
