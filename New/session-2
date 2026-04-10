@@ -95,7 +95,7 @@ what are ansible adhoc commands:
 playbook:
 ----------
 
-ping the servers using ansible
+ping the servers using ansible-playbook
     vi ansi.yml 
 
         ---
@@ -105,3 +105,25 @@ ping the servers using ansible
             - name: pinging all servers
             ping:
         ...
+
+    cmd to execute the playbook: ansible-playbook ansi.yaml
+    cmd to list the servers the playing running: ansible-playbook ansi.yaml --list-hosts
+    cmd to check the syntax of playbook: ansible-playbook --syntax-check
+    cmd to dry run the playbook: ansible-playbook -check
+    
+installing the  nginx using the playbook
+    vi ansi.yml 
+
+        ---
+        - hosts: [dev]
+        become: true
+        tasks: 
+            - name: pinging all servers
+            apt:
+                name: httpd
+                state: installed
+        ...       
+
+    value of state must be one of to install anything: absent, build-dep, fixed, latest, present,
+
+
