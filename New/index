@@ -48,7 +48,7 @@
    0) starts with ---  and end with ...
    1) install httpd  sever
    2) start the httpd server which installed
-   3) Variables
+   3) Variables and register
         vars:
             a: 10
             b: 20
