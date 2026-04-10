@@ -89,3 +89,19 @@ what are ansible adhoc commands:
             2.2) ansible dev -m service -a "name=httpd state=started"
             2.2) ansible dev -m commads -a "ls"
             2.3) ansible dev -m shell -a "pwd"
+
+
+
+playbook:
+----------
+
+ping the servers using ansible
+    vi ansi.yml 
+
+        ---
+        - hosts: [dev]
+        become: true
+        tasks: 
+            - name: pinging all servers
+            ping:
+        ...
