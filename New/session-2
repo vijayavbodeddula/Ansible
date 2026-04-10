@@ -111,14 +111,14 @@ ping the servers using ansible-playbook
     cmd to check the syntax of playbook: ansible-playbook --syntax-check
     cmd to dry run the playbook: ansible-playbook -check
     
-installing the  nginx using the playbook
+installing the  nginx using the playbook using yum module
     vi ansi.yml 
 
         ---
         - hosts: [dev]
         become: true
         tasks: 
-            - name: pinging all servers
+            - name: installing https in dev servers
             yum:
                 name: httpd
                 state: installed
@@ -126,4 +126,77 @@ installing the  nginx using the playbook
 
     value of state must be one of to install anything: absent, build-dep, fixed, latest, present,
 
+uninstall the installed httpd server using yum but state is absent
 
+        ---
+        - hosts: [dev]
+          become: true
+          tasks: 
+            - name: uninstalling https in dev servers
+            yum:
+                name: httpd
+                state: absent        #uninstall
+        ...
+
+installing the  nginx using the playbook using yum module and start the server using service module
+
+        ---
+        - hosts: [dev]
+          become: true
+          tasks: 
+            - name: installing https in dev servers
+              yum:
+                name: httpd
+                state: installed
+            - name: starting the httpd server
+              service:
+                name: httpd
+                state: started      #restarted , reload
+        ...
+
+creating the file in remote server
+---
+- hosts: all
+  become: true
+  tasks: 
+    - name: creating a file in dev servers
+      file:
+        path: /vijay.txt
+        state: file     #directory,touch
+...
+
+deleting the file in remote server
+- hosts: dev
+  become: true
+  tasks:
+    - name: creating a file in dev servers
+      file:
+        path: /vijay.txt
+        state: absent    #directory,touch
+
+
+creating a file and providing custom user and permissions
+- hosts: dev
+  become: true
+  tasks:
+    - name: creating a file in dev servers
+      file:
+        path: /vijay.txt
+        state: touch    #directory,touch
+        mode: 777
+        owner: ec2-user
+        group: root
+...
+
+copy the file context from loal to remote using the copy module
+- hosts: dev
+  become: true
+  tasks:
+    - name: creating a file in dev servers
+      shell: ls .
+    - name: hi
+      copy:
+        src: ./index.html
+        dest: /var/www/html     #directory,touch
+        
+...
