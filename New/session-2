@@ -200,3 +200,26 @@ copy the file context from loal to remote using the copy module
         dest: /var/www/html     #directory,touch
         
 ...
+
+copy the file context from loal to remote using the template module
+    ubuntu@ip-172-31-66-205:~$ cat index.html 
+    <h1>{{a}} {{b}} hi this is vijay from bglr<h1>
+
+    ubuntu@ip-172-31-66-205:~$ cat ansi.yml 
+    ---------------------------------------
+    - hosts: dev
+    become: true
+    vars: 
+        a: 10
+        b: 20
+    tasks:
+        - name: creating a file in dev servers
+        shell: ls .
+        - name: hi
+        template:
+            src: ./index.html
+            dest: /var/www/html  
+    ubuntu@ip-172-31-66-205:~$ 
+    #directory,touch
+            
+    ...
