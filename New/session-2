@@ -1,4 +1,4 @@
- 2) learnig ansible cmds which we call it as adhoc commads
+2) learnig ansible cmds which we call it as adhoc commads
     2.1) adhoc commands 
         2.1.0) ansible <severs or groups or ips> -b -m  module -a "name=value"
         2.1.1) ansible <severs or groups or ips> -m  module -a "name=value"
