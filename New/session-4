@@ -44,7 +44,7 @@
           tasks:
             - name: printing the a and b value using debug modulw
               debug:
-                msg: printing a vaule is {{a}}
+                msg: printing a vaule is '{{a}}'
         ...
        
         output:
