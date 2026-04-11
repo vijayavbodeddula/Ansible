@@ -125,3 +125,12 @@ PLAY RECAP *********************************************************************
 172.31.71.64               : ok=2    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
 172.31.75.2                : ok=2    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
 
+
+commands that we can apply on ansible playbook file
+4)cmds to executing the play books
+        cmds:
+            - ansible-playbokk playbook-name -b                         # sudo -b
+            - ansible-playbokk playbook-name --syntax-check             # syntax check of my  playbook
+            - ansible-playbokk playbook-name --check                    # dry run
+            - ansible-playbokk playbook-name --list-hosts               # hosts lsis which mention in playbook
+            - ansible-playbook playbook-name --extra-vars "v1=10 v2=20" # passing the vars values from the ansibel cmds
