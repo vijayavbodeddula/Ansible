@@ -1,13 +1,14 @@
 3) sample playbook
    0) starts with ---  and end with ...
-   1) install httpd  sever
-   2) start the httpd server which installed
-   3) Variables and register
+   1) install httpd  sever and start the httpd server which installed
+   2) debug var
+   3) debug msg 
+   2) Variables and register
         vars:
             a: 10
             b: 20
-    4) printing the values inyaml using double flower braces {{a}}
-    5)cmds to executing the play books
+    3) printing the values inyaml using double flower braces {{a}}
+    4)cmds to executing the play books
         cmds:
             - ansible-playbokk playbook-name -b
             - ansible-playbokk playbook-name --syntax-check
@@ -16,3 +17,109 @@
             - ansible-playbook playbook-name --extra-vars "v1=10 v2=20"
 
 ---------------------------------------------------------------------------------------------------
+evry yaml start with 
+---
+and ends with threeble dots 
+...
+
+install httpd  sever
+---
+- hosts: dev
+  become: true
+  tasks:
+    - name: installing the httpd server
+      yum: 
+        name: httpd
+        state: present
+    - name: start the server
+      yum:
+        name: start the httpd
+        state: started
+...
+
+
+
+2) debug:       #it is used to print the variable value 
+     var: '{{a}}'
+
+ubuntu@ip-172-31-66-205:~$ vi ansi.yml 
+---
+- hosts: dev
+  become: true
+  vars: 
+    a: 10
+    b: 20
+  tasks:
+    - name: creating a file in dev servers 
+      debug:
+        var: '{{a}}'
+...
+
+output
+------
+ubuntu@ip-172-31-66-205:~$ ansible-playbook ansi.yml
+
+PLAY [dev] ************************************************************************************************************************************************************************************************
+
+TASK [Gathering Facts] ************************************************************************************************************************************************************************************
+[WARNING]: Platform linux on host 172.31.71.64 is using the discovered Python interpreter at /usr/bin/python3.9, but future installation of another Python interpreter could change the meaning of that
+path. See https://docs.ansible.com/ansible-core/2.16/reference_appendices/interpreter_discovery.html for more information.
+ok: [172.31.71.64]
+[WARNING]: Platform linux on host 172.31.75.2 is using the discovered Python interpreter at /usr/bin/python3.9, but future installation of another Python interpreter could change the meaning of that
+path. See https://docs.ansible.com/ansible-core/2.16/reference_appendices/interpreter_discovery.html for more information.
+ok: [172.31.75.2]
+
+TASK [creating a file in dev servers] *********************************************************************************************************************************************************************
+ok: [172.31.71.64] => {
+    "10": "VARIABLE IS NOT DEFINED!"
+}
+ok: [172.31.75.2] => {
+    "10": "VARIABLE IS NOT DEFINED!"
+}
+
+PLAY RECAP ************************************************************************************************************************************************************************************************
+172.31.71.64               : ok=2    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+172.31.75.2                : ok=2    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+
+
+3) debug:       #it is used to print the variable value 
+     msg: a value is '{{a}}'
+
+ubuntu@ip-172-31-66-205:~$ cat ansi.yml 
+---
+- hosts: dev
+  become: true
+  vars: 
+    a: 10
+    b: 20
+  tasks:
+    - name: creating a file in dev servers 
+      debug:
+        msg: a value is '{{a}}'
+
+output
+-----
+ubuntu@ip-172-31-66-205:~$ ansible-playbook ansi.yml 
+
+PLAY [dev] ************************************************************************************************************************************************************************************************
+
+TASK [Gathering Facts] ************************************************************************************************************************************************************************************
+[WARNING]: Platform linux on host 172.31.75.2 is using the discovered Python interpreter at /usr/bin/python3.9, but future installation of another Python interpreter could change the meaning of that
+path. See https://docs.ansible.com/ansible-core/2.16/reference_appendices/interpreter_discovery.html for more information.
+ok: [172.31.75.2]
+[WARNING]: Platform linux on host 172.31.71.64 is using the discovered Python interpreter at /usr/bin/python3.9, but future installation of another Python interpreter could change the meaning of that
+path. See https://docs.ansible.com/ansible-core/2.16/reference_appendices/interpreter_discovery.html for more information.
+ok: [172.31.71.64]
+
+TASK [creating a file in dev servers] *********************************************************************************************************************************************************************
+ok: [172.31.71.64] => {
+    "msg": "a value is '10'"
+}
+ok: [172.31.75.2] => {
+    "msg": "a value is '10'"
+}
+
+PLAY RECAP ************************************************************************************************************************************************************************************************
+172.31.71.64               : ok=2    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+172.31.75.2                : ok=2    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+
