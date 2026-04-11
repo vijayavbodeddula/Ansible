@@ -82,6 +82,8 @@ PLAY RECAP *********************************************************************
 172.31.75.2                : ok=2    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
 
 
+
+
 3) debug:       #it is used to print the variable value and custom msg
      msg: a value is '{{a}}'
 
