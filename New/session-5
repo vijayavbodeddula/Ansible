@@ -9,3 +9,25 @@
             implanting the playbook using group vars and hosts vars
     b) handlers
 ---------------------------------------------------------------------------------------------------
+
+playbook varibles
+----------------
+
+- hosts: all
+  vars:
+    a: 10
+    b: 20
+  tasks:
+    - name: print values
+      debug:
+        msg: "a={{ a }}, b={{ b }}"
+        
+tasks variable
+--------------
+- hosts: all
+  tasks:
+    - name: task level variable
+      vars:
+        x: 100
+      debug:
+        msg: "x={{ x }}"
