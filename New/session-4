@@ -1,0 +1,52 @@
+
+4) modules using ansible play-book
+    1) creating a file in remote server 
+       file:
+         path: /vijay
+         state: touch
+         user: vijay
+         group: vijay
+         mode: 777
+    2) choices for file state
+       a) absent
+       b) directory
+       c) hard
+       d) file
+       e) touch
+       f) directory
+    3) installing the httpd server and start using single file
+    4) copy the file content from local file to remote file
+    5) use template module and use vars copy the value into remote from local
+    6) debug module
+        used to print the variable value in local server console
+        ---
+        - hosts: all
+          become: true
+          vars: 
+            a: 10
+            b- 20
+          tasks:
+            - name: printing the a and b value using debug modulw
+              debug:
+                var: a
+        ...
+
+        output
+        10
+        20
+    7) use msg module
+       it is used to print the variable value along with the messagg
+        ---
+        - hosts: all
+          become: true
+          vars: 
+            a: 10
+          tasks:
+            - name: printing the a and b value using debug modulw
+              debug:
+                msg: printing a vaule is {{a}}
+        ...
+       
+        output:
+        printing a vaule is 10
+---------------------------------------------------------------------------------------------------
